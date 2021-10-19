@@ -32,8 +32,10 @@ let pokemonList = [
 ];
 
 for (let i = 0; i < pokemonList.length; i++) {
-  document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ' m , weight: ' + pokemonList[i].weight + ' kg)');
-  if (pokemonList[i].height > 1.5) {
-    document.write(" - Wow that's big!")
+  document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ' m, weight: ' + pokemonList[i].weight + ' kg)'); // list all pokemons with height and weight
+  if (pokemonList[i].height > 1.5) { // conditional to have a message display if height above a certain threshold
+    document.write(" - Wow that's big!" + '</br')
+  } else{
+    document.write('</br>')
   }
 }
