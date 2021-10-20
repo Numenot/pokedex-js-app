@@ -3,31 +3,31 @@ let pokemonList = [
     name: 'Bulbasaur',
     height: 0.7,
     weight: 6.9,
-    type: ['grass', 'poison']
+    types: ['grass', 'poison']
   },
   {
     name: 'Charmander',
     height: 0.6,
     weight: 8.5,
-    type: ['fire']
+    types: ['fire']
   },
   {
     name: 'Squirtle',
     height: 0.5,
     weight: 9,
-    type: ['water']
+    types: ['water']
   },
   {
     name: 'Pidgey',
     height: 0.3,
     weight: 1.8,
-    type: ['flying', 'normal']
+    types: ['flying', 'normal']
   },
   {
     name: 'Blastoise',
     height: 1.6,
     weight: 85.5,
-    type: ['water']
+    types: ['water']
   }
 ];
 
