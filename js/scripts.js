@@ -37,20 +37,40 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
   }
 
   function getAll() { //function to retrieve full list of pokemons
-    return pokemonList
+    return pokemonList;
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listPokemon = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    listPokemon.appendChild(button);
+    pokemonList.appendChild(listPokemon);
+    button.addEventListener('click', function () {
+      showDetails(pokemon)
+    });
   }
 
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
 })();
 
 pokemonRepository.getAll().forEach(function (pokemon) { //forEach loop to list all pokemons and their properties
-  document.write(pokemon.name + ' (height: ' + pokemon.height + ' m, weight: ' + pokemon.weight + ' kg)'); // list all pokemons with height and weight
-    if (pokemon.height > 1.5) { // conditional to have a message display if height above a certain threshold
-      document.write(" - Wow that's big!" + '</br')
-    } else{
-      document.write('</br>')
-    }
+  pokemonRepository.addListItem(pokemon);
 });
+
+  // document.write(pokemon.name + ' (height: ' + pokemon.height + ' m, weight: ' + pokemon.weight + ' kg)'); // list all pokemons with height and weight
+  //   if (pokemon.height > 1.5) { // conditional to have a message display if height above a certain threshold
+  //     document.write(" - Wow that's big!" + '</br')
+  //   } else{
+  //     document.write('</br>')
+  //   }
