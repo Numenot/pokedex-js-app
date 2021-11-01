@@ -67,10 +67,3 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
 pokemonRepository.getAll().forEach(function (pokemon) { //forEach loop to list all pokemons and their properties
   pokemonRepository.addListItem(pokemon);
 });
-
-  // document.write(pokemon.name + ' (height: ' + pokemon.height + ' m, weight: ' + pokemon.weight + ' kg)'); // list all pokemons with height and weight
-  //   if (pokemon.height > 1.5) { // conditional to have a message display if height above a certain threshold
-  //     document.write(" - Wow that's big!" + '</br')
-  //   } else{
-  //     document.write('</br>')
-  //   }
