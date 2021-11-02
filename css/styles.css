@@ -1,0 +1,106 @@
+@font-face {
+  font-family: PokemonGB;
+  src: url('fonts/Pokemon_GB.ttf');
+}
+
+body {
+  margin: 2rem;
+  background-color: #CE1111;
+  font-family: 'PokemonGB', Arial, sans-serif;
+}
+
+.pokedex-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.blue_light_icon {
+  max-width: 100%;
+  height: 80px;
+  margin-right: 20px;
+}
+
+.red_light_icon {
+  max-width: 100%;
+  height: 20px;
+}
+
+.yellow_light_icon {
+  max-width: 100%;
+  height: 20px;
+}
+
+.green_light_icon {
+  max-width: 100%;
+  height: 20px;
+}
+
+.pokedex_status-lights {
+  margin-left: 20px;
+}
+
+.pokemon-list {
+  background-color: #f8f8ff;
+  border: solid #9D1414 1rem;
+  column-count: 3;
+  column-rule: solid;
+  border-radius: 30px;
+  list-style-type: none;
+  align-items: center;
+  padding: 1rem;
+}
+
+li {
+    margin: 10px;
+}
+
+.button-class {
+  padding: 10px;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'PokemonGB', Arial, sans-serif;
+  color: #fff;
+  background-color: #059ac7;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #047092;
+}
+
+.button-class:active {
+  box-shadow: 0 1px #047092;
+  transform: translateY(4px);
+}
+
+h1 {
+  font-size: 40px;
+  font-family: 'PokemonGB', Arial, sans-serif;
+}
+
+@media all and (min-width: 500px) and (max-width: 750px) {
+  .pokemon-list {
+    column-count: 2;
+  }
+  .button-class {
+    font-size: 18px;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .pokemon-list {
+    column-count: 1;
+  }
+  .button-class {
+    font-size: 15px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  .blue_light_icon {
+    max-width: 100%;
+    height: 40px;
+  }
+}
