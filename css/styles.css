@@ -4,9 +4,34 @@
 }
 
 body {
-  margin: 2rem;
+  margin: 0.5em 0.5em 0.5em 0.5em;
   background-color: #CE1111;
   font-family: 'PokemonGB', Arial, sans-serif;
+  border: 6px solid #9D1414;
+  padding-right: 2em;
+  padding-left: 2em;
+  padding-top: 1em;
+  box-shadow: 0 0 10px black;
+}
+
+::-webkit-scrollbar {
+  width: 1em;
+}
+
+::-webkit-scrollbar-track {
+  background: #059ac7;
+  border-radius: 100vw;
+  margin-top: 9em;
+  margin-bottom: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #047092;
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #034d63;
 }
 
 .pokedex-top {
@@ -34,16 +59,18 @@ body {
 .pokemon-list {
   background-color: #f8f8ff;
   border: solid #9D1414 1rem;
-  column-count: 3;
+  columns: 240px 4;
   column-rule: solid;
-  border-radius: 30px;
+  column-gap: 6em;
+  /* border-radius: 30px; */
   list-style-type: none;
-  align-items: center;
-  padding: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0 10px black;
 }
 
 li {
-    margin: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
 .button-class {
@@ -105,6 +132,10 @@ h1 {
   max-width: 700px;
   text-align: center;
   text-transform: capitalize;
+  border-radius: 30px;
+  border: solid #9D1414 10px;
+  background-color: #f8f8ff;
+  box-shadow: 0 0 80px 5px #9D1414;
 }
 
 .modal-close {
@@ -116,6 +147,7 @@ h1 {
   text-decoration: underline;
   font-family: 'PokemonGB', Arial, sans-serif;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .modal h1 {
@@ -131,21 +163,13 @@ h1 {
   height: 200px;
 }
 
-@media all and (min-width: 500px) and (max-width: 820px) {
-  .pokemon-list {
-    column-count: 2;
-  }
-  .button-class {
-    font-size: 18px;
-  }
-}
-
 @media all and (max-width: 550px) {
-  .pokemon-list {
-    column-count: 1;
-  }
   .button-class {
     font-size: 15px;
+  }
+  body {
+    padding-right: 1em;
+    padding-left: 1em;
   }
   h1 {
     font-size: 22px;
