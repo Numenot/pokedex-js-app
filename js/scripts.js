@@ -11,11 +11,14 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
   }
 
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector('.pokemon-list');
+    let pokemonList = document.querySelector('.list-group');
     let listPokemon = document.createElement('li');
+    listPokemon.classList.add('group-list-item');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add('button-class');
+    button.classList.add('btn', 'btn-primary');
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#PokedexModal');
     listPokemon.appendChild(button);
     pokemonList.appendChild(listPokemon);
     button.addEventListener('click', function (event) {
@@ -60,64 +63,33 @@ function showDetails(pokemon) { //show pokemon details in modal using details fr
   });
 }
 
-let modalContainer = document.querySelector('#modal-container');
-
 function showModal(pokemon) {
-  modalContainer.innerHTML = '';
+  let modalBody = $(".modal-body");
+  let modalTitle = $(".modal-title");
+  let modalHeader= $(".modal-header");
 
-  let modal = document.createElement('div'); //add modal div
-  modal.classList.add('modal');
+  modalTitle.empty();
+  modalBody.empty();
 
-  let closeButtonElement = document.createElement('button'); //add close button in modal
-  closeButtonElement.classList.add('modal-close');
-  closeButtonElement.innerText = 'X';
-  closeButtonElement.addEventListener('click', hideModal);
+  let modalPokemonName = $("<h1>" + pokemon.name + "</h1>"); //add h1 in modal for pokemon name
 
-  let modalPokemonName = document.createElement('h1'); //add h1 in modal for pokemon name
-  modalPokemonName.innerText = pokemon.name;
+  let modalPokemonImg = $('<img class="modal-img" style="width:50%">'); //add pokemon image in modal
+  modalPokemonImg.attr("src", pokemon.imageUrl);
 
-  let modalPokemonImg = document.createElement('img'); //add pokemon image in modal
-  modalPokemonImg.src = pokemon.imageUrl;
+  let modalPokemonHeight = $("<p>" + "Height: " + pokemon.height + "</p>"); //add paragraph to display height of pokemon
 
-  let modalPokemonHeight = document.createElement('p'); //add paragraph to display height of pokemon
-  modalPokemonHeight.innerText = 'Height: ' + pokemon.height;
+  let modalPokemonWeight = $("<p>" + "Weight: " + pokemon.weight + "</p>"); //add paragraph to display weight of pokemon
 
-  let modalPokemonWeight = document.createElement('p'); //add paragraph to display weight of pokemon
-  modalPokemonWeight.innerText = 'Weight: ' + pokemon.weight;
-
-  modal.appendChild(closeButtonElement);
-  modal.appendChild(modalPokemonName);
-  modal.appendChild(modalPokemonImg);
-  modal.appendChild(modalPokemonHeight);
-  modal.appendChild(modalPokemonWeight);
+  modalTitle.append(modalPokemonName);
+  modalBody.append(modalPokemonImg);
+  modalBody.append(modalPokemonHeight);
+  modalBody.append(modalPokemonWeight);
 
   pokemon.types.forEach(item => {
-        let modalPokemonTypes = document.createElement('p'); //add paragraphs to display types of pokemon
-        modalPokemonTypes.innerText = ('Type: ') + item.type.name;
-        modal.appendChild(modalPokemonTypes);
+        let modalPokemonTypes = $("<p>" + "Type: " + item.type.name + "</p>")  //add paragraphs to display types of pokemon
+        modalBody.append(modalPokemonTypes);
     });
-
-  modalContainer.appendChild(modal);
-
-  modalContainer.classList.add('is-visible'); //when showModal function runs, the class is-visible is added to modal to display it via css
 }
-
-function hideModal() {
-  modalContainer.classList.remove('is-visible'); //when hideModal function runs, the class is-visible is removed from modal to stop displaying it via css
-}
-
-window.addEventListener('keydown', (e) => { //run hideModal function when using Escape key if modal is currently visible
-  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-    hideModal();
-  }
-});
-
-modalContainer.addEventListener('click', (e) => { //run hideModal function when clicking outside of modal if modal is currently visible
-  let target = e.target;
-  if (target === modalContainer) {
-    hideModal();
-  }
-});
 
   return {
     add: add,
