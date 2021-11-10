@@ -39,21 +39,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-.blue_light_icon {
-  max-width: 100%;
-  height: 80px;
-  margin-right: 20px;
-}
-
-.status-lights {
-  max-width: 100%;
-  height: 20px;
-}
-
-.pokedex_status-lights {
-  margin-left: 20px;
+  margin-bottom: 10px;
 }
 
 .pokemon-list {
@@ -121,9 +107,5 @@ h1 {
   }
   h1 {
     font-size: 22px;
-  }
-  .blue_light_icon {
-    max-width: 100%;
-    height: 40px;
   }
 }

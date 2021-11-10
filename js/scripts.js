@@ -106,3 +106,12 @@ pokemonRepository.loadList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+$(document).ready(function () {
+  $('#search-input').on('keyup', function () {
+    var value = $(this).val().toLowerCase();
+    $('.group-list-item').filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) >= 0);
+    });
+  });
+});
