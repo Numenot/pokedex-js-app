@@ -10,16 +10,8 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
     return pokemonList;
   }
 
-  async function loadSprite(pokemon) {
-    let res = await fetch(pokemon.detailsUrl);
-    let resData = await res.json();
-
-    pokemon.spriteUrl = resData.sprites.other['official-artwork']['front_default'];
-    return resData;
-  }
-
   function addListItem(pokemon) {
-    loadSprite(pokemon)
+    loadImg(pokemon)
       .then(() => {
         let { name, spriteUrl } = pokemon;
         let pokemonList = document.querySelector('.list-group');
@@ -27,7 +19,7 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
         listPokemon.classList.add('group-list-item');
         let button = document.createElement('button');
         button.innerHTML = `
-                    <img src="${spriteUrl}" alt="${name}"/>
+                    <img src='${spriteUrl}' alt='${name}'/>
                     <p>${name}</p>
                     `;
         button.classList.add('btn', 'btn-primary');
@@ -35,7 +27,7 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
         button.setAttribute('data-target', '#PokedexModal');
         listPokemon.appendChild(button);
         pokemonList.appendChild(listPokemon);
-        button.addEventListener('click', function (event) {
+        button.addEventListener('click', function () {
           showDetails(pokemon)
         });
       });
@@ -81,24 +73,23 @@ function showDetails(pokemon) { //show pokemon details in modal using details fr
 }
 
 function showModal(pokemon) {
-  let modalBody = $(".modal-body");
-  let modalTitle = $(".modal-title");
-  let modalHeader= $(".modal-header");
+  let modalBody = $('.modal-body');
+  let modalTitle = $('.modal-title');
 
   modalTitle.empty();
   modalBody.empty();
 
-  let modalPokemonName = $("<h1>" + "#" + pokemon.id + " " + pokemon.name + "</h1>"); //add h1 in modal for pokemon name
+  let modalPokemonName = $('<h1>' + '#' + pokemon.id + ' ' + pokemon.name + '</h1>'); //add h1 in modal for pokemon name
 
   let modalPokemonImg = $('<img class="modal-img" id="pokemonNormalImg" style="width:50%">'); //add pokemon image in modal
-  modalPokemonImg.attr("src", pokemon.imageUrl);
+  modalPokemonImg.attr('src', pokemon.imageUrl);
 
   let modalShinyPokemonImg = $('<img class="modal-shiny-img hidden" id="pokemonShinyImg" style="width:50%">'); //add pokemon image in modal
-  modalShinyPokemonImg.attr("src", pokemon.shinyImageUrl);
+  modalShinyPokemonImg.attr('src', pokemon.shinyImageUrl);
 
-  let modalPokemonHeight = $("<p>" + "Height: " + (pokemon.height/10) + " m" + "</p>"); //add paragraph to display height of pokemon
+  let modalPokemonHeight = $('<p>' + 'Height: ' + (pokemon.height/10) + ' m' + '</p>'); //add paragraph to display height of pokemon
 
-  let modalPokemonWeight = $("<p>" + "Weight: " + (pokemon.weight/10) + " kg" + "</p>"); //add paragraph to display weight of pokemon
+  let modalPokemonWeight = $('<p>' + 'Weight: ' + (pokemon.weight/10) + ' kg' + '</p>'); //add paragraph to display weight of pokemon
 
   modalTitle.append(modalPokemonName);
   modalBody.append(modalPokemonImg);
@@ -107,7 +98,7 @@ function showModal(pokemon) {
   modalBody.append(modalPokemonWeight);
 
   pokemon.types.forEach(item => {
-        let modalPokemonTypes = $("<p>" + "Type: " + item.type.name + "</p>")  //add paragraphs to display types of pokemon
+        let modalPokemonTypes = $('<p>' + 'Type: ' + item.type.name + '</p>')  //add paragraphs to display types of pokemon
         modalBody.append(modalPokemonTypes);
     });
 
@@ -124,16 +115,23 @@ function showModal(pokemon) {
   checkboxDiv.appendChild(checkboxInput);
   checkboxDiv.appendChild(checkboxLabel);
   modalBody.append(checkboxDiv);
-  checkboxInput.addEventListener('click', function (event) {
+  checkboxInput.addEventListener('click', function () {
     toggleShiny()
   });
 }
 
+async function loadImg(pokemon) {
+  let res = await fetch(pokemon.detailsUrl);
+  let resData = await res.json();
+  pokemon.spriteUrl = resData.sprites.other['official-artwork']['front_default'];
+  return resData;
+}
+
 function toggleShiny () {
-  let pokemonImgNormal = document.getElementById("pokemonNormalImg");
-  let pokemonImgShiny = document.getElementById("pokemonShinyImg");
-  pokemonImgShiny.classList.toggle("hidden");
-  pokemonImgNormal.classList.toggle("hidden");
+  let pokemonImgNormal = document.getElementById('pokemonNormalImg');
+  let pokemonImgShiny = document.getElementById('pokemonShinyImg');
+  pokemonImgShiny.classList.toggle('hidden');
+  pokemonImgNormal.classList.toggle('hidden');
 }
 
   return {
