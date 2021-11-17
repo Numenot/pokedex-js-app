@@ -1,6 +1,6 @@
 let pokemonRepository = (function() {  //IIFE for pokemonlist
   let pokemonList = [];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
 
   function add(pokemon) { //function to add new pokemon
     pokemonList.push(pokemon);
@@ -64,7 +64,8 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
  }).then(function (details) {
    // Now we add the details to the item
    item.id = details.id;
-   item.imageUrl = details.sprites.other['official-artwork']['front_default'];
+   item.imageUrl = details.sprites.other['home']['front_default'];
+   item.shinyImageUrl = details.sprites.other['home']['front_shiny'];
    item.height = details.height;
    item.weight = details.weight;
    item.types = details.types;
@@ -89,8 +90,11 @@ function showModal(pokemon) {
 
   let modalPokemonName = $("<h1>" + "#" + pokemon.id + " " + pokemon.name + "</h1>"); //add h1 in modal for pokemon name
 
-  let modalPokemonImg = $('<img class="modal-img" style="width:50%">'); //add pokemon image in modal
+  let modalPokemonImg = $('<img class="modal-img" id="pokemonNormalImg" style="width:50%">'); //add pokemon image in modal
   modalPokemonImg.attr("src", pokemon.imageUrl);
+
+  let modalShinyPokemonImg = $('<img class="modal-shiny-img hidden" id="pokemonShinyImg" style="width:50%">'); //add pokemon image in modal
+  modalShinyPokemonImg.attr("src", pokemon.shinyImageUrl);
 
   let modalPokemonHeight = $("<p>" + "Height: " + (pokemon.height/10) + " m" + "</p>"); //add paragraph to display height of pokemon
 
@@ -98,6 +102,7 @@ function showModal(pokemon) {
 
   modalTitle.append(modalPokemonName);
   modalBody.append(modalPokemonImg);
+  modalBody.append(modalShinyPokemonImg);
   modalBody.append(modalPokemonHeight);
   modalBody.append(modalPokemonWeight);
 
@@ -105,6 +110,30 @@ function showModal(pokemon) {
         let modalPokemonTypes = $("<p>" + "Type: " + item.type.name + "</p>")  //add paragraphs to display types of pokemon
         modalBody.append(modalPokemonTypes);
     });
+
+  let checkboxDiv = document.createElement('div');
+  checkboxDiv.classList.add('form-check');
+  let checkboxInput = document.createElement('input');
+  checkboxInput.classList.add('form-check-input');
+  checkboxInput.setAttribute('type', 'checkbox');
+  checkboxInput.setAttribute('id', 'check');
+  let checkboxLabel = document.createElement('label');
+  checkboxLabel.classList.add('form-check-label');
+  checkboxLabel.setAttribute('for', 'check');
+  checkboxLabel.innerText = 'Shiny';
+  checkboxDiv.appendChild(checkboxInput);
+  checkboxDiv.appendChild(checkboxLabel);
+  modalBody.append(checkboxDiv);
+  checkboxInput.addEventListener('click', function (event) {
+    toggleShiny()
+  });
+}
+
+function toggleShiny () {
+  let pokemonImgNormal = document.getElementById("pokemonNormalImg");
+  let pokemonImgShiny = document.getElementById("pokemonShinyImg");
+  pokemonImgShiny.classList.toggle("hidden");
+  pokemonImgNormal.classList.toggle("hidden");
 }
 
   return {
@@ -125,7 +154,7 @@ pokemonRepository.loadList().then(function() {
 
 $(document).ready(function () {
   $('#search-input').on('keyup', function () {
-    var value = $(this).val().toLowerCase();
+    let value = $(this).val().toLowerCase();
     $('.group-list-item').filter(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) >= 0);
     });
