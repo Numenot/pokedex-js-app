@@ -10,20 +10,35 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
     return pokemonList;
   }
 
+  async function loadSprite(pokemon) {
+    let res = await fetch(pokemon.detailsUrl);
+    let resData = await res.json();
+
+    pokemon.spriteUrl = resData.sprites.other['official-artwork']['front_default'];
+    return resData;
+  }
+
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector('.list-group');
-    let listPokemon = document.createElement('li');
-    listPokemon.classList.add('group-list-item');
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('btn', 'btn-primary');
-    button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#PokedexModal');
-    listPokemon.appendChild(button);
-    pokemonList.appendChild(listPokemon);
-    button.addEventListener('click', function (event) {
-      showDetails(pokemon)
-    });
+    loadSprite(pokemon)
+      .then(() => {
+        let { name, spriteUrl } = pokemon;
+        let pokemonList = document.querySelector('.list-group');
+        let listPokemon = document.createElement('li');
+        listPokemon.classList.add('group-list-item');
+        let button = document.createElement('button');
+        button.innerHTML = `
+                    <img src="${spriteUrl}" alt="${name}"/>
+                    <p>${name}</p>
+                    `;
+        button.classList.add('btn', 'btn-primary');
+        button.setAttribute('data-toggle', 'modal');
+        button.setAttribute('data-target', '#PokedexModal');
+        listPokemon.appendChild(button);
+        pokemonList.appendChild(listPokemon);
+        button.addEventListener('click', function (event) {
+          showDetails(pokemon)
+        });
+      });
   }
 
   function loadList() {
@@ -48,6 +63,7 @@ let pokemonRepository = (function() {  //IIFE for pokemonlist
    return response.json();
  }).then(function (details) {
    // Now we add the details to the item
+   item.id = details.id;
    item.imageUrl = details.sprites.other['official-artwork']['front_default'];
    item.height = details.height;
    item.weight = details.weight;
@@ -71,14 +87,14 @@ function showModal(pokemon) {
   modalTitle.empty();
   modalBody.empty();
 
-  let modalPokemonName = $("<h1>" + pokemon.name + "</h1>"); //add h1 in modal for pokemon name
+  let modalPokemonName = $("<h1>" + "#" + pokemon.id + " " + pokemon.name + "</h1>"); //add h1 in modal for pokemon name
 
   let modalPokemonImg = $('<img class="modal-img" style="width:50%">'); //add pokemon image in modal
   modalPokemonImg.attr("src", pokemon.imageUrl);
 
-  let modalPokemonHeight = $("<p>" + "Height: " + pokemon.height + "</p>"); //add paragraph to display height of pokemon
+  let modalPokemonHeight = $("<p>" + "Height: " + (pokemon.height/10) + " m" + "</p>"); //add paragraph to display height of pokemon
 
-  let modalPokemonWeight = $("<p>" + "Weight: " + pokemon.weight + "</p>"); //add paragraph to display weight of pokemon
+  let modalPokemonWeight = $("<p>" + "Weight: " + (pokemon.weight/10) + " kg" + "</p>"); //add paragraph to display weight of pokemon
 
   modalTitle.append(modalPokemonName);
   modalBody.append(modalPokemonImg);

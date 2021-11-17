@@ -9,17 +9,18 @@
   </head>
   <body>
     <div class="pokedex-top">
-      <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CE1111">
-      <a class="navbar-brand" href="#">Pokedex</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Search" aria-label="Search">
-        </form>
+      <img src="img/Blue_Light_Icon.svg" alt="Blue light indicating the pokedex is on" class="blue_light_icon">
+      <h1> Pokedex </h1>
+      <div class="pokedex_status-lights">
+        <img src="img/Red_Light_Icon.svg" alt="Red light indicating the status of the Poxedex" class="red_light_icon status-lights">
+        <img src="img/Yellow_Light_Icon.svg" alt="Yellow light indicating the status of the Poxedex" class="yellow_light_icon status-lights">
+        <img src="img/Green_Light_Icon.svg" alt="Green light indicating the status of the Poxedex" class="green_light_icon status-lights">
       </div>
-    </nav>
+    </div>
+    <div class="search-bar__container">
+      <form class="form-row col-xl-2 col-lg-6 col-md-7 col-sm-8 col-10">
+        <input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Search" aria-label="Search">
+      </form>
     </div>
     <div class="list-container row justify-content-center">
       <ul class='pokemon-list list-group'>
