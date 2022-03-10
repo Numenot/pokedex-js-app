@@ -1,5 +1,6 @@
 # Pokedex
-Javascript application allowing users to access the original list of 151 Pokemon in the Kanto region, search for specific ones by name, and display more details about them if needed by clicking on them.
+- Javascript application allowing users to access the original list of 151 Pokemon in the Kanto region, search for specific ones by name, and display more details about them if needed by clicking on them.
+- Live site: https://numenot.github.io/pokedex-js-app/
 
 # Key Features
 - Load data from an external source (API), in this case using the PokeAPI (https://pokeapi.co/docs/v2)
@@ -12,6 +13,14 @@ Javascript application allowing users to access the original list of 151 Pokemon
 - Bootstrap
 - jQuery
 
+# Screenshots
+
+## Desktop:
+
 ![Screenshot](./img/Pokedex.png)
 
-Live site: https://numenot.github.io/pokedex-js-app/
+## Mobile:
+
+![Screenshot](./img/Pokedex-mobile.png)
+
+
